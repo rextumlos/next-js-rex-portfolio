@@ -47,7 +47,7 @@ const experience = {
     items: [
         {
             company: "Kodacamp",
-            position: "Backend Software Engineer",
+            position: "Software Engineer",
             duration: "Dec 2023 - Present"
         },
         {
