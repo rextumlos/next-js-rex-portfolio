@@ -12,17 +12,20 @@ const info = [
     {
         icon: <FaPhoneAlt />,
         title: "Phone",
-        description: "(+63) 960 3055 380"
+        description: "(+63) 960 3055 380",
+        meta: "telephone"
     },
     {
         icon: <FaEnvelope />,
         title: "Email",
-        description: "jrptumlos@gmail.com"
+        description: "jrptumlos@gmail.com",
+        meta: "email"
     },
     {
         icon: <FaMapMarkerAlt />,
         title: "Address",
-        description: "Taguig City, Philippines"
+        description: "Taguig City, Philippines",
+        meta: "address"
     },
 ]
 
@@ -52,12 +55,12 @@ const Contact = () => {
             animate={{opacity: 1, transition: {delay: 2.4, duration: 0.4, ease: "easeIn"}}}
             className="py-6"
         >
-            <div className="container mx-auto">
+            <div className="container mx-auto" itemScope itemType="https://schema.org/Person">
                 <div className="flex flex-col xl:flex-row gap-[30px]">
                 {/*  form  */}
                     <div className="xl:w-[54%] order-2 xl:order-none">
                         <form action="" className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl" onSubmit={e => handleSubmit(e)}>
-                            <h3 className="text-4xl text-accent">Let's work together!</h3>
+                            <h1 className="text-4xl text-accent">Let's work together!</h1>
                             <p className="text-white/60">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Itaque si aut requietem natura non quaereret aut eam posset alia quadam ratione consequi. Certe, nisi voluptatem tanti aestimaretis.
                             </p>
@@ -111,7 +114,7 @@ const Contact = () => {
                                     </div>
                                     <div className="flex-1">
                                         <p className="text-white/60">{item.title}</p>
-                                        <h3 className="text-xl">{item.description}</h3>
+                                        <h3 className="text-xl" itemProp={item.meta}>{item.description}</h3>
                                     </div>
                                 </li>
                             })}

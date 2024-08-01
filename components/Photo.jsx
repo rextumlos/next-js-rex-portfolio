@@ -28,7 +28,7 @@ const Photo = () => {
                             }}
                             className="w-[298px] h-[298px] xl:w-[490px] xl:h-[490px] mix-blend-lighten absolute"
                 >
-                    <Image src="/assets/rex.png" priority quality={100} fill alt="rex-photo"
+                    <Image src="/assets/rex.png" quality={100} alt="rex-photo" width={490} height={490} loading="eager" title="rex-photo" itemProp="image"
                            className="object-contain rounded-full"/>
                     <div className="absolute inset-0 rounded-full"
                          style={{backgroundImage: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.6))'}}></div>

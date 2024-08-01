@@ -25,7 +25,10 @@ const Home = () => {
 
     return (
         <section className="h-full" id="home">
-            <div className="container mx-auto h-full">
+            <div className="container mx-auto h-full"
+                 itemScope
+                 itemType="https://schema.org/Person"
+            >
                 <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24">
                     {/* text */}
                     <div className="text-center xl:text-left order-2 xl:order-none">
@@ -52,10 +55,10 @@ const Home = () => {
                           </span>
                         </motion.div>
                         <h1 className="h1 mb-6">
-                            Hello! I'm<br/><span className="text-accent">Rex Tumlos</span>
+                            Hello! I'm<br/> <span className="text-accent" itemProp="name">Rex Tumlos</span>
                         </h1>
 
-                        <p className="max-w-[500px] mb-9 text-white/80">
+                        <p className="max-w-[500px] mb-9 text-white/80" itemProp="description">
                             I excel in creating websites, specialized in backend, and proficient in various programming
                             languages and technologies.
                         </p>

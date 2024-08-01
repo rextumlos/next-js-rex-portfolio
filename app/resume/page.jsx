@@ -6,7 +6,7 @@ import { SiExpress, SiRubyonrails, SiNextdotjs, SiTailwindcss, SiMariadb, SiMong
 import { BiLogoSpringBoot } from "react-icons/bi";
 
 const about = {
-    title: "About me",
+    title: "My personal information",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Itaque si aut requietem natura non quaereret aut eam posset alia quadam ratione consequi. Certe, nisi voluptatem tanti aestimaretis.",
     info: [
         {
@@ -42,7 +42,7 @@ const about = {
 
 const experience = {
     icon: "",
-    title: "My experience",
+    title: "My working experience",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Itaque si aut requietem natura non quaereret aut eam posset alia quadam ratione consequi. Certe, nisi voluptatem tanti aestimaretis.",
     items: [
         {
@@ -60,7 +60,7 @@ const experience = {
 
 const education = {
     icon: "",
-    title: "My education",
+    title: "My educational background",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Itaque si aut requietem natura non quaereret aut eam posset alia quadam ratione consequi. Certe, nisi voluptatem tanti aestimaretis.",
     items: [
         {
@@ -82,7 +82,7 @@ const education = {
 }
 
 const skills = {
-    title: "My skills",
+    title: "My skills I experienced",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Itaque si aut requietem natura non quaereret aut eam posset alia quadam ratione consequi. Certe, nisi voluptatem tanti aestimaretis.",
     skillList: [
         {
@@ -169,7 +169,10 @@ const Resume = () => {
                 }}
                 className="min-h-[80vh] flex items-center justify-center py-12 xl:py-0"
             >
-                <div className="container mx-auto">
+                <div className="container mx-auto"
+                     itemScope
+                     itemType="https://schema.org/Person"
+                >
                     <Tabs defaultValue="experience"
                           className="flex flex-col xl:flex-row gap-[60px]"
                     >
@@ -185,19 +188,19 @@ const Resume = () => {
                             {/* experience */}
                             <TabsContent value="experience" className="w-full">
                                 <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                                    <h3 className="text-4xl font-bold">{experience.title}</h3>
+                                    <h1 className="text-4xl font-bold">{experience.title}</h1>
                                     <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{experience.description}</p>
 
                                     <ScrollArea className="h-[400px]">
                                         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
                                             {experience.items.map((item, index) => {
                                                 return <li key={index} className="bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1">
-                                                    <span className="text-accent">{item.duration}</span>
-                                                    <h3 className="text-xl max-w-[260px] min-h-[60px] text-center lg:text-left">{item.position}</h3>
+                                                    <span className="text-accent" itemProp="startDate">{item.duration}</span>
+                                                    <h3 className="text-xl max-w-[260px] min-h-[60px] text-center lg:text-left" itemProp="jobTitle">{item.position}</h3>
                                                     <div className="flex items-center gap-3">
                                                         {/*  dot  */}
                                                         <span className="w-[6px] h-[6px] rounded-full bg-accent"></span>
-                                                        <p className="text-white/60">{item.company}</p>
+                                                        <p className="text-white/60" itemProp="worksFor">{item.company}</p>
                                                     </div>
                                                 </li>
                                             })}
@@ -209,20 +212,20 @@ const Resume = () => {
                             {/* education */}
                             <TabsContent value="education" className="w-full">
                                 <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                                    <h3 className="text-4xl font-bold">{education.title}</h3>
+                                    <h1 className="text-4xl font-bold">{education.title}</h1>
                                     <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{education.description}</p>
 
                                     <ScrollArea className="h-[400px]">
-                                        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
+                                        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]" itemScope itemType="https://schema.org/EducationalOccupationalCredential">
                                             {education.items.map((item, index) => {
                                                 return <li key={index}
                                                            className="bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1">
-                                                    <span className="text-accent">{item.duration}</span>
-                                                    <h3 className={`${item.institution.length > 15 ? "text-lg" : "text-xl"} max-w-[260px] min-h-[60px] text-center lg:text-left`}>{item.degree}</h3>
+                                                    <span className="text-accent" itemProp="startDate">{item.duration}</span>
+                                                    <h3 className={`${item.institution.length > 15 ? "text-lg" : "text-xl"} max-w-[260px] min-h-[60px] text-center lg:text-left`} itemProp="credentialCategory">{item.degree}</h3>
                                                     <div className="flex items-center gap-3">
                                                         {/*  dot  */}
                                                         <span className="w-[6px] h-[6px] rounded-full bg-accent"></span>
-                                                        <p className={`${item.institution.length > 15 && "text-sm"} text-white/60 lg:text-left`}>{item.institution}</p>
+                                                        <p className={`${item.institution.length > 15 && "text-sm"} text-white/60 lg:text-left`} itemProp="recognizedBy">{item.institution}</p>
                                                     </div>
                                                 </li>
                                             })}
@@ -235,7 +238,7 @@ const Resume = () => {
                             <TabsContent value="skills" className="w-full h-full">
                                 <div className="flex flex-col gap-[30px]">
                                     <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                                        <h3 className="text-4xl font-bold">{skills.title}</h3>
+                                        <h1 className="text-4xl font-bold">{skills.title}</h1>
                                         <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{skills.description}</p>
                                     </div>
                                     <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 xl:gap-[30px]">
@@ -262,7 +265,7 @@ const Resume = () => {
                             {/* about */}
                             <TabsContent value="about" className="w-full text-center xl:text-left">
                                 <div className="flex flex-col gap-[30px]">
-                                    <h3 className="text-4xl font-bold">{about.title}</h3>
+                                    <h1 className="text-4xl font-bold">{about.title}</h1>
                                     <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">{about.description}</p>
                                     <ul className="grid grid-cols-1 xl:grid-cols-2 gap-y-6 max-w-[620px] mx-auto xl:mx-0">
                                         {about.info.map((item, index) => {
