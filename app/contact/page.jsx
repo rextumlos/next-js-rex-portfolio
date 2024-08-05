@@ -30,23 +30,44 @@ const info = [
 ]
 
 const Contact = () => {
-    const [firstname, setFirstname] = useState("")
-    const [lastname, setLastname] = useState("")
-    const [email, setEmail] = useState("")
-    const [phone, setPhone] = useState("")
-    const [service, setService] = useState("")
-    const [message, setMessage] = useState("")
+    const [formData, setFormData] = useState({
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: ""
+    });
+    const [isSentEmail, setIsSentEmail] = useState(false)
 
-    const handleSubmit = (e) => {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
+    const handleSelectChange = (value) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            service: value
+        }));
+    };
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log({
-            firstname,
-            lastname,
-            email,
-            phone,
-            message,
-            service,
+        const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
         })
+
+        const result = await response.json()
+        result.message === "Success!" && setIsSentEmail(true)
     }
 
     return (
@@ -67,18 +88,30 @@ const Contact = () => {
 
                         {/*  input  */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <Input type="firstname" placeholder="First name"
-                                       onChange={e => setFirstname(() => e.target.value)} />
-                                <Input type="lastname" placeholder="Last name"
-                                       onChange={e => setLastname(() => e.target.value)}/>
+                                <Input type="text" placeholder="First name"
+                                       required
+                                       name="firstname"
+                                       value={formData.firstname}
+                                       onChange={handleChange} />
+                                <Input type="text" placeholder="Last name"
+                                       required
+                                       name="lastname"
+                                       value={formData.lastname}
+                                       onChange={handleChange}/>
                                 <Input type="email" placeholder="Email address"
-                                       onChange={e => setEmail(() => e.target.value)}/>
+                                       required
+                                       name="email"
+                                       value={formData.email}
+                                       onChange={handleChange}/>
                                 <Input type="phone" placeholder="Phone number"
-                                       onChange={e => setPhone(() => e.target.value)}/>
+                                       required
+                                       name="phone"
+                                       value={formData.phone}
+                                       onChange={handleChange}/>
                             </div>
 
                         {/*  select  */}
-                            <Select onValueChange={setService}>
+                            <Select onValueChange={handleSelectChange}>
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder="Select a service" />
                                 </SelectTrigger>
@@ -96,11 +129,16 @@ const Contact = () => {
                             <Textarea
                                 className="h-[200px]"
                                 placeholder="Type your message here."
-                                onChange={e => setMessage(e.target.value)}
+                                name="message"
+                                required
+                                onChange={handleChange}
                             />
 
                         {/*  button  */}
-                            <Button size="md" className="max-w-40">Send message</Button>
+                            <div className="flex flex-row justify-between items-center">
+                                <Button size="md" className="max-w-40">Send message</Button>
+                                {isSentEmail && (<span>Sent message! Thank you!</span>)}
+                            </div>
                         </form>
                     </div>
 
